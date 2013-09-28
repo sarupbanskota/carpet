@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'votein_server',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,3 +156,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from vagrant_settings import *
+except ImportError:
+    pass
