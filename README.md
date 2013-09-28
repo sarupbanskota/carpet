@@ -22,7 +22,7 @@ Team [LifeOfPy](http://djangodash.com/teams/c4/lifeofpy/)'s DjangoDash 2013 repo
 5. You can now use this command to ssh into your virtual machine's console: `vagrant ssh`.
 6. To shutdown/halt the virtual machine, use: `vagrant halt`
 7. Make sure to backup your data inside VM before destroying the VM. To destroy the VM, use: `vagrant destroy`. To recreate the development environment, use `vagrant up` again.
-9. To access project's website, goto [127.0.0.1:4567](127.0.0.1:4567) on your web browser on host OS.
+9. To access project's website, goto [127.0.0.1:4567](127.0.0.1:4567). To access project's admin panel, goto [127.0.0.1:4567/admin](127.0.0.1:4567/admin) and use **user** username and  **user** password to login.
 8. Optional: If you plan to use `git` from VM, it is highly recommended that you setup `git` (in the Vagrant VM), when you use `vagrant ssh` for the very first time:
     1. You need to [tell git your full name](https://help.github.com/articles/set-up-git#username), so that it can properly label the commits you make:
 
