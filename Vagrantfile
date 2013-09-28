@@ -15,6 +15,7 @@ Vagrant.configure("2") do |config|
 
   # Port forwarding
   config.vm.network :forwarded_port, host: 4567, guest: 80
+  config.vm.network :forwarded_port, host: 5678, guest: 8080
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
