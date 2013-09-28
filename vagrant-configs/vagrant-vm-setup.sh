@@ -76,8 +76,9 @@ git pull
 cp ./vagrant_settings.py /vagrant/carpet/carpet/
 
 cd /vagrant/carpet/
+python manage.py syncdb
 # South migrations:
-python manage.py migrate server
+python manage.py migrate votein_server
 # Collect static files in directory specified in Django's settings.py
 python manage.py collectstatic --noinput
 
