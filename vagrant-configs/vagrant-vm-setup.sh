@@ -26,3 +26,10 @@ sudo apt-get -y install postgresql-9.1
 sudo apt-get -y install postgresql
 sudo apt-get -y install postgresql-client
 sudo apt-get -y install python-psycopg2
+
+echo "Installing Django! Please wait..."
+sudo pip install django
+echo "Installing Gunicorn! Please wait..."
+sudo pip install gunicorn
+echo "Installing South! Please wait..."
+sudo pip install South
