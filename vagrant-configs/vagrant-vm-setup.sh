@@ -36,6 +36,10 @@ sudo pip install gunicorn
 echo "Installing South! Please wait..."
 sudo pip install South
 
+# Use 'pillow' instead of PIL?
+#echo "Installing PIL! Please wait..."
+#sudo pip install PIL
+
 if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Copy Ubuntu Upstart config
     sudo cp /vagrant/vagrant-configs/djangodash-server.conf /etc/init/djangodash-server.conf
@@ -68,4 +72,10 @@ fi
 
 cd /home/vagrant/vagrant_django_settings.py
 git pull
-cp ./vagrant_settings.py /vagrant/happyly/happyly/
+cp ./vagrant_settings.py /vagrant/carpet/carpet/
+
+cd /vagrant/carpet/
+# South migrations:
+python manage.py migrate server
+# Collect static files in directory specified in Django's settings.py
+python manage.py collectstatic --noinput
