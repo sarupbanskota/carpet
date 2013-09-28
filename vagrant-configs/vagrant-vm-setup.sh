@@ -66,6 +66,11 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     echo "local      django_db   django_login   md5" | sudo tee -a /etc/postgresql/9.1/main/pg_hba.conf
     sudo /etc/init.d/postgresql restart
     
+    cd /vagrant/carpet/
+    python manage.py syncdb --noinput
+    #python manage.py schemamigration votein_server --initial
+    python manage.py migrate votein_server
+    
     # Do NOT delete the following line. This makes sure that commands in
     # this 'if' construct only the very first time VM is booted.
     touch /home/vagrant/.vagrant_do_not_delete
@@ -76,9 +81,11 @@ git pull
 cp ./vagrant_settings.py /vagrant/carpet/carpet/
 
 cd /vagrant/carpet/
-python manage.py syncdb
+#python manage.py syncdb
+
 # South migrations:
-python manage.py migrate votein_server
+#python manage.py migrate votein_server
+
 # Collect static files in directory specified in Django's settings.py
 python manage.py collectstatic --noinput
 
