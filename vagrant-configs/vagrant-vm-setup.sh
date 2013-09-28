@@ -47,4 +47,7 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     sudo /etc/init.d/nginx start
     # Start nginx when system boots
     sudo update-rc.d nginx defaults
+    
+    git clone https://gist.github.com/18b7598e67b6d5b57e18.git vagrant_django_settings.py
+    cp vagrant_django_settings.py/vagrant_settings.py /vagrant/carpet/carpet/
 fi
