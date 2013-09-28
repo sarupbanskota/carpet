@@ -40,7 +40,7 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Copy Ubuntu Upstart config
     sudo cp /vagrant/vagrant-configs/djangodash-server.conf /etc/init/djangodash-server.conf
     # Start Gunicorn server
-    sudo service happyly-server start
+    sudo service djangodash-server start
     
     # Copy nginx config
     sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.original.backup
