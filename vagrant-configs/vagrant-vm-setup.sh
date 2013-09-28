@@ -37,4 +37,8 @@ sudo pip install South
 if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Copy Ubuntu Upstart config
     sudo cp /vagrant/vagrant-configs/djangodash-server.conf /etc/init/djangodash-server.conf
+    # Start happyly's Gunicorn server
+    sudo service happyly-server start
+    
+    
 fi
