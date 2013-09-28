@@ -1,6 +1,6 @@
 ## carpet
 
-Team LifeOfPy's DjangoDash 2013 repo.
+Team [LifeOfPy](http://djangodash.com/teams/c4/lifeofpy/)'s DjangoDash 2013 repo.
 
 ## Installation/Setup
 ### Install prerequisites
