@@ -60,4 +60,8 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     sudo -u postgres psql -c "CREATE DATABASE django_db OWNER django_login ENCODING 'UTF8';"
     echo "local      django_db   django_login   md5" | sudo tee -a /etc/postgresql/9.1/main/pg_hba.conf
     sudo /etc/init.d/postgresql restart
+    
+    # Do NOT delete the following line. This makes sure that commands in
+    # this 'if' construct only the very first time VM is booted.
+    touch /home/vagrant/.vagrant_do_not_delete
 fi
