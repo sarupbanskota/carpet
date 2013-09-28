@@ -40,5 +40,11 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Start happyly's Gunicorn server
     sudo service happyly-server start
     
-    
+    # Copy nginx config
+    sudo mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.original.backup
+    sudo cp /vagrant/vagrant-configs/nginx-config /etc/nginx/sites-available/default
+    # Start nginx (only for current login)
+    sudo /etc/init.d/nginx start
+    # Start nginx when system boots
+    sudo update-rc.d nginx defaults
 fi
