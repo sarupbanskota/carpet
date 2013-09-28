@@ -18,9 +18,12 @@ Team [LifeOfPy](http://djangodash.com/teams/c4/lifeofpy/)'s DjangoDash 2013 repo
 2. Clone happyly-server repository from Github using command:
 `git clone https://github.com/sarupbanskota/carpet.git`
 3. Change to the project directory: `cd carpet`.
-4. Run this command to boot the development VM: `vagrant up`
-5. You can now use this command to ssh/login to your virtual machine's console: `vagrant ssh`.
-6. If you plan to use `git` from VM, it is highly recommended that you setup `git` (in the Vagrant VM), when you `vagrant ssh` for the very first time:
+4. Run this command to boot the development VM: `vagrant up`. Go and grab a coffee! Depending on your Internet connection speed, this commands might take anywhere between few minutes to hour(s) to complete.
+5. You can now use this command to ssh into your virtual machine's console: `vagrant ssh`.
+6. To shutdown/halt the virtual machine, use: `vagrant halt`
+7. Make sure to backup your data inside VM before destroying the VM. To destroy the VM, use: `vagrant destroy`. To recreate the development environment, use `vagrant up` again.
+9. To access project's website, goto [127.0.0.1:4567](127.0.0.1:4567) on your web browser on host OS.
+8. Optional: If you plan to use `git` from VM, it is highly recommended that you setup `git` (in the Vagrant VM), when you use `vagrant ssh` for the very first time:
     1. You need to [tell git your full name](https://help.github.com/articles/set-up-git#username), so that it can properly label the commits you make:
 
         `git config --global user.name "Your Name Here"`
