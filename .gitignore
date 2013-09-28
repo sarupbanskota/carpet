@@ -1,0 +1,8 @@
+*.pyc
+*.save
+*.db
+*.sqlite
+.DS_Store
+vagrant_settings.py
+.vagrant
+*.temp
