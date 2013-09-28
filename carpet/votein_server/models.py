@@ -10,9 +10,7 @@ class Vote(models.Model):
 		(DOWN, 'Down'),
 		(UP, 'Up'),
 	)
-	voteType = models.CharField(max_length=2,
-                                      choices=VOTE_CHOICES,
-                                      default=UP)
+	voteType = models.CharField(max_length=2, choices=VOTE_CHOICES, default=UP)
 	def __unicode__(self):
 		return self.voteType in (self.UP, self.DOWN)
 
@@ -63,7 +61,7 @@ class Article(models.Model):
 	submitter = models.CharField(max_length=50)
 	articeOpinion = models.ManyToManyField(Opinion)
 	articleComments = models.ManyToManyField(Comment)
-	articleVotes = models.ManytoManyField(Vote)
+	#articleVotes = models.ManytoManyField(Vote)
 	def __unicode__(self):
 		return self.name
 	def addComment(self, comment):
