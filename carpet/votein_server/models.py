@@ -61,9 +61,9 @@ class Opinion(models.Model):
 class Article(models.Model):
 	articleName = models.CharField(max_length=100)
 	submitter = models.CharField(max_length=50)
-	#articeOpinion = ManyToManyField(Opinion)
-	#articleComments = ManyToManyField(Comment)
-	#articleVotes = ManytoManyField(Vote)
+	articeOpinion = models.ManyToManyField(Opinion)
+	articleComments = models.ManyToManyField(Comment)
+	articleVotes = models.ManytoManyField(Vote)
 	def __unicode__(self):
 		return self.name
 	def addComment(self, comment):
