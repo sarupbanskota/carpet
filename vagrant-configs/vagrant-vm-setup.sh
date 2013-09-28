@@ -11,6 +11,8 @@ sudo apt-get -y install python
 sudo apt-get -y install python-pip
 sudo apt-get -y install git
 sudo apt-get -y install tmux
+# 'whois' is needed for 'mkpasswd'
+sudo apt-get -y install whois
 
 if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Locale stuff (for PostgreSQL)
@@ -37,7 +39,7 @@ sudo pip install South
 if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Copy Ubuntu Upstart config
     sudo cp /vagrant/vagrant-configs/djangodash-server.conf /etc/init/djangodash-server.conf
-    # Start happyly's Gunicorn server
+    # Start Gunicorn server
     sudo service happyly-server start
     
     # Copy nginx config
@@ -50,4 +52,12 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     
     git clone https://gist.github.com/18b7598e67b6d5b57e18.git vagrant_django_settings.py
     cp vagrant_django_settings.py/vagrant_settings.py /vagrant/carpet/carpet/
+    
+    # Change password of 'postgres' user (New password: 'vagrant')
+    sudo usermod -p `mkpasswd vagrant` postgres
+    #sudo -u postgres createuser -d -R -S -P django_login
+    sudo -u postgres psql -c "CREATE ROLE django_login PASSWORD 'vagrant' NOSUPERUSER CREATEDB NOCREATEROLE INHERIT LOGIN;"
+    sudo -u postgres psql -c "CREATE DATABASE django_db OWNER django_login ENCODING 'UTF8';"
+    echo "local      django_db   django_login   md5" | sudo tee -a /etc/postgresql/9.1/main/pg_hba.conf
+    sudo /etc/init.d/postgresql restart
 fi
