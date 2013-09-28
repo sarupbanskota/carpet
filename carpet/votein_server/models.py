@@ -74,3 +74,48 @@ class Article(models.Model):
 		elif vote.voteType == Vote.VOTE_CHOICES.Down:
 			self.articleVotes.downVotes.add(vote)
 		self.save()
+
+
+
+def getArticleUpVotes(obj):
+	try:
+		art = Article.objects.get(obj = obj)
+		return art.articleVotes.upVotes.count()
+	except ObjectDoesNotExist:
+		print "Article does not exist"
+
+def getArticleDownVotes(obj):
+	try:
+		art = Article.objects.get(obj = obj)
+		return art.articleVotes.downVotes.count()
+	except ObjectDoesNotExist:
+		print "Article does not exist"
+
+def getOpinionUpVotes(obj):
+	try:
+		op = Opinion.objects.get(obj = obj)
+		return op.opinionVotes.upVotes.count()
+	except ObjectDoesNotExist:
+		print "Opinion does not exist"
+
+def getOpinionDownVotes(obj):
+	try:
+		op = Opinion.objects.get(obj = obj)
+		return op.opinionVotes.downVotes.count()
+	except ObjectDoesNotExist:
+		print "Opinion does not exist"
+
+
+def getCommentUpVotes(obj):
+	try:
+		cmt = Comment.objects.get(obj = obj)
+		return cmt.commentVotes.upVotes.count()
+	except ObjectDoesNotExist:
+		print "Comment does not exist"
+
+def getCommentDownVotes(obj):
+	try:
+		cmt = Comment.objects.get(obj = obj)
+		return cmt.commentVotes.downVotes.count()
+	except ObjectDoesNotExist:
+		print "Comment does not exist"
