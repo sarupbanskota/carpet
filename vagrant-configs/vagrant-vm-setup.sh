@@ -79,3 +79,7 @@ cd /vagrant/carpet/
 python manage.py migrate server
 # Collect static files in directory specified in Django's settings.py
 python manage.py collectstatic --noinput
+
+# Check! Why do I need to manually start Upstart job 'djangodash-server'
+# below? 
+sudo service djangodash-server start
