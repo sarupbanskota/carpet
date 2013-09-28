@@ -5,7 +5,7 @@ server {
   error_log  /var/log/nginx/error.log;
   
   location /static/ { # STATIC_URL
-      alias /home/vagrant/votein-static/; # STATIC_ROOT
+      alias /home/vagrant/django-site-static/; # STATIC_ROOT
       expires 30d;
   }
 
