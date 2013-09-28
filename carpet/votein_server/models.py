@@ -63,7 +63,7 @@ class Article(models.Model):
 	submitter = models.CharField(max_length=50)
 	#articeOpinion = ManyToManyField(Opinion)
 	#articleComments = ManyToManyField(Comment)
-	articleVotes = ManytoManyField(Vote)
+	#articleVotes = ManytoManyField(Vote)
 	def __unicode__(self):
 		return self.name
 	def addComment(self, comment):
