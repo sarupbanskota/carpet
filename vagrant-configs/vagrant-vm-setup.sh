@@ -65,3 +65,7 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # this 'if' construct only the very first time VM is booted.
     touch /home/vagrant/.vagrant_do_not_delete
 fi
+
+cd /home/vagrant/vagrant_django_settings.py
+git pull
+cp ./vagrant_settings.py /vagrant/happyly/happyly/
