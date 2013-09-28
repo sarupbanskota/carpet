@@ -4,17 +4,17 @@ echo "==========================================================="
 echo "[vagrant-vm-setup.sh] Setting up vagrant VM, please wait..."
 echo "==========================================================="
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo apt-get -y install python-dev
-sudo apt-get -y install python
-sudo apt-get -y install python-pip
-sudo apt-get -y install git
-sudo apt-get -y install tmux
-# 'whois' is needed for 'mkpasswd'
-sudo apt-get -y install whois
-
 if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
+    sudo apt-get -y update
+    sudo apt-get -y install nginx
+    sudo apt-get -y install python-dev
+    sudo apt-get -y install python
+    sudo apt-get -y install python-pip
+    sudo apt-get -y install git
+    sudo apt-get -y install tmux
+    # 'whois' is needed for 'mkpasswd'
+    sudo apt-get -y install whois
+    
     # Locale stuff (for PostgreSQL)
     # Source: http://www.softr.li/blog/2012/05/22/chef-recipe-to-install-a-postgresql-server-on-a-machine-configured-with-en_us-locales
     export LANGUAGE="en_US.UTF-8"
@@ -22,23 +22,24 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     export LC_ALL="en_US.UTF-8"
     locale-gen en_US.UTF-8
     sudo dpkg-reconfigure locales
+    
+    sudo apt-get -y install postgresql-9.1 
+    sudo apt-get -y install postgresql
+    sudo apt-get -y install postgresql-client
+    sudo apt-get -y install python-psycopg2
+    
+    echo "Installing Django! Please wait..."
+    sudo pip install django
+    echo "Installing Gunicorn! Please wait..."
+    sudo pip install gunicorn
+    echo "Installing South! Please wait..."
+    sudo pip install South
+    
+    # Use 'pillow' instead of PIL?
+    #echo "Installing PIL! Please wait..."
+    #sudo pip install PIL
+
 fi
-
-sudo apt-get -y install postgresql-9.1 
-sudo apt-get -y install postgresql
-sudo apt-get -y install postgresql-client
-sudo apt-get -y install python-psycopg2
-
-echo "Installing Django! Please wait..."
-sudo pip install django
-echo "Installing Gunicorn! Please wait..."
-sudo pip install gunicorn
-echo "Installing South! Please wait..."
-sudo pip install South
-
-# Use 'pillow' instead of PIL?
-#echo "Installing PIL! Please wait..."
-#sudo pip install PIL
 
 if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     # Copy Ubuntu Upstart config
