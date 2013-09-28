@@ -1,4 +1,4 @@
 carpet
 ======
 
-PAPA_HERE's djangodash repo.
+Team LifeOfPy's DjangoDash 2013 repo.
