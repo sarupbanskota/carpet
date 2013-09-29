@@ -67,8 +67,8 @@ if [ ! -f /home/vagrant/.vagrant_do_not_delete ]; then
     sudo /etc/init.d/postgresql restart
     
     cd /vagrant/carpet/
-    python manage.py syncdb --noinput
     #python manage.py schemamigration votein_server --initial
+    python manage.py syncdb --noinput
     python manage.py migrate votein_server
     
     # Do NOT delete the following line. This makes sure that commands in
