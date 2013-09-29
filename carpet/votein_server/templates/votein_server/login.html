@@ -1,0 +1,14 @@
+{% extends "votein_server/base.html" %}
+{% load staticfiles %}
+
+{% block extra-css %}<link href="{% static 'css/signin.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input class="form-control" placeholder="Username" autofocus="" type="text">
+        <input class="form-control" placeholder="Password" type="password"><br />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+<br />
+{% endblock %}

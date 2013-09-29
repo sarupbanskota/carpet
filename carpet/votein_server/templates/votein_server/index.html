@@ -1,6 +1,8 @@
 {% extends "votein_server/base.html" %}
 {% load staticfiles %}
 
+{% block extra-css %}<link href="{% static 'css/jumbotron-narrow.css' %}" rel="stylesheet">{% endblock %}
+
 {% block nav-home %}<li class="active"><a href="{% url 'home' %}">Home</a></li>{% endblock %}
 
 {% block content %}

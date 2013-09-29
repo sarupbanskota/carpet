@@ -10,8 +10,9 @@
     <title>Vote.in | Allow others to vote your opinions on the Web!</title>
 
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-    <link href="{% static 'css/jumbotron-narrow.css' %}" rel="stylesheet">
-
+    {% block extra-css %}{% endblock %}
+    
+    
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
@@ -28,7 +29,7 @@
           {% block nav-about %}<li><a href="{% url 'about' %}">About</a></li>{% endblock %}
           {% block nav-contact %}<li><a href="{% url 'contact' %}">Contact</a></li>{% endblock %}
         </ul>
-        <h3 class="text-muted">vote.in</h3>
+        <h3 class="text-muted"><a href="{% url 'home' %}">vote.in</a></h3>
       </div>
 
       {% block content %}{% endblock %}
