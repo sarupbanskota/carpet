@@ -1,0 +1,17 @@
+{% extends "votein_server/base.html" %}
+{% load staticfiles %}
+
+{% block extra-css %}<link href="{% static 'css/jumbotron-narrow.css' %}" rel="stylesheet">{% endblock %}
+
+{% block nav-home %}<li class="active"><a href="{% url 'home' %}">Home</a></li>{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h2>Blogpost Feedback on Steroids!</h2>
+        <p class="lead">If you’re passionate about writing and sharing, Vote.in helps you garner feedback on individual opinions in a blogpost/article. Readers can upvote/downvote your individual opinions, advice, suggestions, thoughts etc. in a post.</p>
+        <p>
+            <a class="btn btn-lg btn-success" href="{% url 'login' %}">Login</a>
+            <a class="btn btn-lg btn-success" href="{% url 'signup' %}">Signup</a>
+        </p>
+      </div>
+{% endblock %}

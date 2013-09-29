@@ -1,0 +1,17 @@
+{% extends "votein_server/base.html" %}
+{% load staticfiles %}
+
+{% block extra-css %}<link href="{% static 'css/signin.css' %}" rel="stylesheet">{% endblock %}
+
+{% block content %}
+      <form class="form-signin" action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Enter your details</h2>
+        <input class="form-control" placeholder="Username" name="username" autofocus="" type="text">
+        <input class="form-control" placeholder="Email" name="email" type="email">
+        <input class="form-control" placeholder="Password" name="password" type="password"><br />
+        {% if error_message %}<p class="red-error">{{ error_message }}</p>{% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create account</button>
+      </form>
+<br />
+{% endblock %}
