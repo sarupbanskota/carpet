@@ -15,3 +15,10 @@ def ArticleReadView(request, embedcode):
         return HttpResponseRedirect('/carpet/renderarticle/%s/' % article.embed_code)
     except:
         return HttpResponseRedirect('/error/')
+
+def AddVote(self, vote):
+    if vote.voteType == Vote.VOTE_CHOICES.Up:
+        self.opinionVotes.upVotes.add(vote) 
+    elif vote.voteType == Vote.VOTE_CHOICES.Down:
+        self.opinionVotes.downVotes.add(vote)
+    self.save()

@@ -28,12 +28,6 @@ class Opinion(models.Model):
     # opinionComment = models.ManyToManyField(Comment)
     def __unicode__(self):
         return self.opinionText
-    def AddVote(self, vote):
-        if vote.voteType == Vote.VOTE_CHOICES.Up:
-            self.opinionVotes.upVotes.add(vote) 
-        elif vote.voteType == Vote.VOTE_CHOICES.Down:
-            self.opinionVotes.downVotes.add(vote)
-        self.save()
 
 class Vote(models.Model):
     opinionID = models.ForeignKey(Opinion)
