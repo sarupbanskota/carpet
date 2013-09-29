@@ -5,10 +5,11 @@
 
 {% block content %}
 <div class="jumbotron">
-    <h1>Heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, 
-egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor 
-mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="{% url 'signup' %}">Sign up today</a></p>
+    <h2>Blogpost Feedback on Steroids!</h2>
+        <p class="lead">If you’re passionate about writing and sharing, Vote.in helps you garner feedback on individual opinions in a blogpost/article. Readers can upvote/downvote your individual opinions, advice, suggestions, thoughts etc. in a post.</p>
+        <p>
+            <a class="btn btn-lg btn-success" href="{% url 'login' %}">Login</a>
+            <a class="btn btn-lg btn-success" href="{% url 'signup' %}">Signup</a>
+        </p>
       </div>
 {% endblock %}
