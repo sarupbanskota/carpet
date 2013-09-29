@@ -36,8 +36,31 @@ def about(request):
 def contact(request):
     return render(request, "votein_server/contact.html")
 
-def login(request):
-    return render(request, "votein_server/login.html")
+def login_user(request):
+    if request.user.is_authenticated():
+        return redirect("app")
+    else:
+        if len(request.POST) == 0:
+            return render(request, "votein_server/login.html")
+        if request.POST['username'] == "":
+            return render(request, "votein_server/login.html", {"error_message": "Please input username!"})
+        elif request.POST['password'] == '':
+            return render(request, "votein_server/login.html", {"error_message": "Please input password!"})
+        else:
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                # the password verified for the user
+                if user.is_active:
+                    login(request, user)
+                    return redirect("app")
+                else:
+                    return HttpResponse("The password is valid, but the account has been disabled!")
+            else:
+                # the authentication system was unable to verify the username and password
+                return render(request, "votein_server/login.html", {"error_message": "The username or password you entered is incorrect."})
 
 def signup(request):
     return render(request, "votein_server/signup.html")
+
+def app(request):
+    return render(request, "votein_server/app.html")
