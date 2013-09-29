@@ -1,0 +1,14 @@
+{% extends "votein_server/base.html" %}
+{% load staticfiles %}
+
+{% block nav-home %}<li class="active"><a href="{% url 'home' %}">Home</a></li>{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Heading</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, 
+egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor 
+mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-lg btn-success" href="{% url 'signup' %}">Sign up today</a></p>
+      </div>
+{% endblock %}
