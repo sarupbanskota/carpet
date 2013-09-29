@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vote.in">
+
+    <title>Vote.in | Allow others to vote your opinions on the Web!</title>
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/jumbotron-narrow.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+        <div class="header">
+        <ul class="nav nav-pills pull-right">
+          {% block nav-home %}<li><a href="{% url 'home' %}">Home</a></li>{% endblock %}
+          {% block nav-about %}<li><a href="{% url 'about' %}">About</a></li>{% endblock %}
+          {% block nav-contact %}<li><a href="{% url 'contact' %}">Contact</a></li>{% endblock %}
+        </ul>
+        <h3 class="text-muted">vote.in</h3>
+      </div>
+
+      {% block content %}{% endblock %}
+
+      <div class="footer">
+        <p>© Vote.in 2013 | <a href="https://www.digitalocean.com/?refcode=85e4977f870b">Hosted on DigitalOcean</a></p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+
+</body></html>
