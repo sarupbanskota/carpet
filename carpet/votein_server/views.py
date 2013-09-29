@@ -1,6 +1,11 @@
 # Create your views here.
 from votein_server.models import *
 from django.views.generic import DetailView, ListView, TemplateView
+from django.http import HttpResponse, HttpResponseRedirect
+
+class ErrorView(TemplateView):
+	def get_context_data(self):
+		return RequestContext(self.request)
 
 def ArticleReadView(request, embedcode):
 	try:
@@ -8,7 +13,3 @@ def ArticleReadView(request, embedcode):
 		return HttpResponseRedirect('/carpet/renderarticle/%s/' % article.embed_code)
 	except:
 		return HttpResponseRedirect('/error/')
-
-class ErrorView(TemplateView):
-	def get_context_data(self):
-		return RequestContext(self.request)
