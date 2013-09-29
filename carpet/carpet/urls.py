@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^signup/', 'votein_server.views.signup', name='signup'),
     url(r'^login/', 'votein_server.views.login_user', name='login'),
     url(r'^app/', 'votein_server.views.app', name='app'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/login'}, name="logout_user"),
     url(r'^renderarticle/(?P<embedcode>\d+)/$', DetailView.as_view(
         template_name='article-read.html',
         model=Article,
