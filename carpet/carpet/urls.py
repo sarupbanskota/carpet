@@ -11,6 +11,11 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'carpet.views.home', name='home'),
     # url(r'^carpet/', include('carpet.foo.urls')),
+    url(r'^$', 'votein_server.views.home', name='home'),
+    url(r'^about/', 'votein_server.views.about', name='about'),
+    url(r'^contact/', 'votein_server.views.contact', name='contact'),
+    url(r'^signup/', 'votein_server.views.signup', name='signup'),
+    url(r'^login/', 'votein_server.views.login', name='login'),
     url(r'^renderarticle/(?P<embedcode>\d+)/$', DetailView.as_view(
         template_name='article-read.html',
         model=Article,
