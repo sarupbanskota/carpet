@@ -9,11 +9,12 @@ class ErrorView(TemplateView):
     def get_context_data(self):
         return render_to_response('errorpage.html')
 
-def ArticleReadView(request, embedcode):
+def ArticleReadView(request, articleLink):
     try:
-        article = getArticle(embedcode)
-        return HttpResponseRedirect('/carpet/renderarticle/%s/' % article.embed_code)
+        article = getArticle(articleLink)
+        return HttpResponseRedirect('/renderarticle/%s/' % article.articleLink)
     except:
+        #return HttpResponseRedirect('/error/')
         return HttpResponseRedirect('/error/')
 
 def AddVote(self, vote):
