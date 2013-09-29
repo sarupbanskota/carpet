@@ -3,123 +3,119 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
 class Article(models.Model):
-	user = models.ForeignKey(User)
-	articleName = models.CharField(max_length=100)
-	submitter = models.CharField(max_length=50)
-	articleLink = models.URLField(blank=True, max_length = 200)
-	embedCode = models.FloatField(max_length=50)
-	# articleComments = models.ManyToManyField(Comment)
-	articleLastEdit = models.DateTimeField(auto_now_add = True)
-	#articleVotes = models.ManytoManyField(Vote)
-	def __unicode__(self):
-		return self.name
-	def addComment(self, comment):
-		self.comment.add(comment)
-	def AddVote(self, vote):
-		if vote.voteType == Vote.VOTE_CHOICES.Up:
-			self.articleVotes.upVotes.add(vote) 
-		elif vote.voteType == Vote.VOTE_CHOICES.Down:
-			self.articleVotes.downVotes.add(vote)
-		self.save()
+    user = models.ForeignKey(User)
+    articleName = models.CharField(max_length=100)
+    submitter = models.CharField(max_length=50)
+    articleLink = models.URLField(blank=True, max_length = 200)
+    embedCode = models.FloatField(max_length=50)
+    # articleComments = models.ManyToManyField(Comment)
+    articleLastEdit = models.DateTimeField(auto_now_add = True)
+    #articleVotes = models.ManytoManyField(Vote)
+    def __unicode__(self):
+        return self.articleName
+    def AddVote(self, vote):
+        if vote.voteType == Vote.VOTE_CHOICES.Up:
+            self.articleVotes.upVotes.add(vote) 
+        elif vote.voteType == Vote.VOTE_CHOICES.Down:
+            self.articleVotes.downVotes.add(vote)
+        self.save()
 
 # Used by the Article class
 class Opinion(models.Model):
-	articleID = models.ForeignKey(Article)
-	opinionText = models.CharField(max_length=1000)
-	submitter = models.CharField(max_length=50)
-	# opinionComment = models.ManyToManyField(Comment)
-	def __unicode__(self):
-		return self.opinionText
-	def addComment(self, comment):
-		self.comment.add(comment)
-	def AddVote(self, vote):
-		if vote.voteType == Vote.VOTE_CHOICES.Up:
-			self.opinionVotes.upVotes.add(vote) 
-		elif vote.voteType == Vote.VOTE_CHOICES.Down:
-			self.opinionVotes.downVotes.add(vote)
-		self.save()
+    articleID = models.ForeignKey(Article)
+    opinionText = models.CharField(max_length=1000)
+    submitter = models.CharField(max_length=50)
+    # opinionComment = models.ManyToManyField(Comment)
+    def __unicode__(self):
+        return self.opinionText
+    def AddVote(self, vote):
+        if vote.voteType == Vote.VOTE_CHOICES.Up:
+            self.opinionVotes.upVotes.add(vote) 
+        elif vote.voteType == Vote.VOTE_CHOICES.Down:
+            self.opinionVotes.downVotes.add(vote)
+        self.save()
 
 class Vote(models.Model):
-	opinionID = models.ForeignKey(Opinion)
-	user = models.ForeignKey(User)		#can be external like Facebook ID?
-	DOWN = 'Dw'
-	UP = 'Up'
-	VOTE_CHOICES = (
-		(DOWN, 'Down'),
-		(UP, 'Up'),
-	)
-	voteType = models.CharField(max_length=2, choices=VOTE_CHOICES, default=UP)
-	def __unicode__(self):
-		return self.voteType in (self.UP, self.DOWN)
+    opinionID = models.ForeignKey(Opinion)
+    user = models.ForeignKey(User)      #can be external like Facebook ID?
+    DOWN = 'Dw'
+    UP = 'Up'
+    VOTE_CHOICES = (
+        (DOWN, 'Down'),
+        (UP, 'Up'),
+    )
+    voteType = models.CharField(max_length=2, choices=VOTE_CHOICES, default=UP)
+    def __unicode__(self):
+        return self.voteType in (self.UP, self.DOWN)
 
 
 # Used by Article class
 # class Image(models.Model):
-# 	submitter = models.CharField(max_length=50)
-# 	imageURL = models.URLField();					#Do we need images as opinions, like an artist's work etc?
-# 	def __unicode__(self):							#Also, Consider changing this to FileField
-# 		return self.imageURL
+#   submitter = models.CharField(max_length=50)
+#   imageURL = models.URLField();                   #Do we need images as opinions, like an artist's work etc?
+#   def __unicode__(self):                          #Also, Consider changing this to FileField
+#       return self.imageURL
 
 # Used by Article class
 # class Comment(models.Model):
-# 	commentText = models.CharField(max_length=1000)
-# 	commentVotes = models.ManyToManyField(Vote)
-# 	submitter = models.CharField(max_length=50)
-# 	def __unicode__(self):
-# 		return self.commentText
-# 	def AddVote(self, vote):
-# 		if vote.voteType == Vote.VOTE_CHOICES.Up:
-# 			self.commentVotes.upVotes.add(vote) 
-# 		elif vote.voteType == Vote.VOTE_CHOICES.Down:
-# 			self.commentVotes.downVotes.add(vote)
-# 		self.save()
+#   commentText = models.CharField(max_length=1000)
+#   commentVotes = models.ManyToManyField(Vote)
+#   submitter = models.CharField(max_length=50)
+#   def __unicode__(self):
+#       return self.commentText
+#   def AddVote(self, vote):
+#       if vote.voteType == Vote.VOTE_CHOICES.Up:
+#           self.commentVotes.upVotes.add(vote) 
+#       elif vote.voteType == Vote.VOTE_CHOICES.Down:
+#           self.commentVotes.downVotes.add(vote)
+#       self.save()
 
 
 def getArticle(embedcode):
-	try:
-		art = Article.objects.get(embed_code=embedcode)
-	except ObjectDoesNotExist:
-		return "Article does not exist"
+    try:
+        art = Article.objects.get(embed_code=embedcode)
+    except ObjectDoesNotExist:
+        return "Article does not exist"
 
 def getArticleUpVotes(obj):
-	try:
-		art = Article.objects.get(obj = obj)
-		return art.articleVotes.upVotes.count()
-	except ObjectDoesNotExist:
-		print "Article does not exist"
+    try:
+        art = Article.objects.get(obj = obj)
+        return art.articleVotes.upVotes.count()
+    except ObjectDoesNotExist:
+        print "Article does not exist"
 
 def getArticleDownVotes(obj):
-	try:
-		art = Article.objects.get(obj = obj)
-		return art.articleVotes.downVotes.count()
-	except ObjectDoesNotExist:
-		print "Article does not exist"
+    try:
+        art = Article.objects.get(obj = obj)
+        return art.articleVotes.downVotes.count()
+    except ObjectDoesNotExist:
+        print "Article does not exist"
 
 def getOpinionUpVotes(obj):
-	try:
-		op = Opinion.objects.get(obj = obj)
-		return op.opinionVotes.upVotes.count()
-	except ObjectDoesNotExist:
-		print "Opinion does not exist"
+    try:
+        op = Opinion.objects.get(obj = obj)
+        return op.opinionVotes.upVotes.count()
+    except ObjectDoesNotExist:
+        print "Opinion does not exist"
 
 def getOpinionDownVotes(obj):
-	try:
-		op = Opinion.objects.get(obj = obj)
-		return op.opinionVotes.downVotes.count()
-	except ObjectDoesNotExist:
-		print "Opinion does not exist"
+    try:
+        op = Opinion.objects.get(obj = obj)
+        return op.opinionVotes.downVotes.count()
+    except ObjectDoesNotExist:
+        print "Opinion does not exist"
 
 
 # def getCommentUpVotes(obj):
-# 	try:
-# 		cmt = Comment.objects.get(obj = obj)
-# 		return cmt.commentVotes.upVotes.count()
-# 	except ObjectDoesNotExist:
-# 		print "Comment does not exist"
+#   try:
+#       cmt = Comment.objects.get(obj = obj)
+#       return cmt.commentVotes.upVotes.count()
+#   except ObjectDoesNotExist:
+#       print "Comment does not exist"
 
 # def getCommentDownVotes(obj):
-# 	try:
-# 		cmt = Comment.objects.get(obj = obj)
-# 		return cmt.commentVotes.downVotes.count()
-# 	except ObjectDoesNotExist:
-# 		print "Comment does not exist"
+#   try:
+#       cmt = Comment.objects.get(obj = obj)
+#       return cmt.commentVotes.downVotes.count()
+#   except ObjectDoesNotExist:
+#       print "Comment does not exist"

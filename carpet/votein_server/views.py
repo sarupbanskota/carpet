@@ -6,12 +6,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 
 class ErrorView(TemplateView):
-	def get_context_data(self):
-		return render_to_response('errorpage.html')
+    def get_context_data(self):
+        return render_to_response('errorpage.html')
 
 def ArticleReadView(request, embedcode):
-	try:
-		article = getArticle(embedcode)
-		return HttpResponseRedirect('/carpet/renderarticle/%s/' % article.embed_code)
-	except:
-		return HttpResponseRedirect('/error/')
+    try:
+        article = getArticle(embedcode)
+        return HttpResponseRedirect('/carpet/renderarticle/%s/' % article.embed_code)
+    except:
+        return HttpResponseRedirect('/error/')
