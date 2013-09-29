@@ -7,7 +7,7 @@ class Article(models.Model):
 	articleName = models.CharField(max_length=100)
 	submitter = models.CharField(max_length=50)
 	articleLink = models.URLField(blank=True, max_length = 200)
-	embedCode = models.CharField(max_length=50)
+	embedCode = models.FloatField(max_length=50)
 	# articleComments = models.ManyToManyField(Comment)
 	articleLastEdit = models.DateTimeField(auto_now_add = True)
 	#articleVotes = models.ManytoManyField(Vote)
@@ -74,6 +74,12 @@ class Vote(models.Model):
 # 			self.commentVotes.downVotes.add(vote)
 # 		self.save()
 
+
+def getArticle(embedcode):
+	try:
+		art = Article.objects.get(embed_code=embedcode)
+	except ObjectDoesNotExist:
+		return "Article does not exist"
 
 def getArticleUpVotes(obj):
 	try:
