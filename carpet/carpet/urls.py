@@ -12,20 +12,20 @@ urlpatterns = patterns('',
     # url(r'^$', 'carpet.views.home', name='home'),
     # url(r'^carpet/', include('carpet.foo.urls')),
     url(r'^renderarticle/(?P<embedcode>\d+)/$', DetailView.as_view(
-		template_name='article-read.html',
-		model=Article,
-		context_object_name='article'
-	)),
+        template_name='article-read.html',
+        model=Article,
+        context_object_name='article'
+    )),
 
-	url(r'^article/(?P<embedcode>\d+)/$', ArticleReadView),
+    url(r'^article/(?P<embedcode>\d+)/$', ArticleReadView),
 
     url(r'^error/$', ErrorView.as_view(
-		template_name='errorpage.html'
-	)),
+        template_name='errorpage.html'
+    )),
 
     #url(r'login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
-	
-	#url(r'signup/$', signup),
+    
+    #url(r'signup/$', signup),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

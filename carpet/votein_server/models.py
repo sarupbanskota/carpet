@@ -1,32 +1,115 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 
 class Article(models.Model):
     user = models.ForeignKey(User)
-    articleName = models.CharField(blank=True, max_length=140)
-    articleLink = models.CharField(max_length = 200)
-    articleCreationTime = models.DataTimeField(auto_now_add = True)
-    articleLastEditTime = models.DateTimeField(auto_now_add = True)
+    articleName = models.CharField(max_length=100)
+    submitter = models.CharField(max_length=50)
+    articleLink = models.URLField(blank=True, max_length = 200)
+    embedCode = models.FloatField(max_length=50)
+    # articleComments = models.ManyToManyField(Comment)
+    articleLastEdit = models.DateTimeField(auto_now_add = True)
+    #articleVotes = models.ManytoManyField(Vote)
     def __unicode__(self):
-        return '{0.user}, {0.articleName}, {0.articleLink}, {0.articleCreationTime}, {0.articleLastEditTime}'.format(self)
+        return self.articleName
+    def AddVote(self, vote):
+        if vote.voteType == Vote.VOTE_CHOICES.Up:
+            self.articleVotes.upVotes.add(vote) 
+        elif vote.voteType == Vote.VOTE_CHOICES.Down:
+            self.articleVotes.downVotes.add(vote)
+        self.save()
 
+# Used by the Article class
 class Opinion(models.Model):
-    article = models.ForeignKey(Article)
-    opinionText = models.TextField(max_length=1000)
-    opinionCreationTime = models.DataTimeField(auto_now_add = True)
-    opinionLastEditTime = models.DateTimeField(auto_now_add = True)
+    articleID = models.ForeignKey(Article)
+    opinionText = models.CharField(max_length=1000)
+    submitter = models.CharField(max_length=50)
+    # opinionComment = models.ManyToManyField(Comment)
     def __unicode__(self):
-        return '{0.article}, {0.opinionText}, {0.opinionCreationTime}, {0.opinionLastEditTime}'.format(self)
+        return self.opinionText
 
 class Vote(models.Model):
-    DOWN = 'D'
-    UP = 'U'
+    opinionID = models.ForeignKey(Opinion)
+    user = models.ForeignKey(User)      #can be external like Facebook ID?
+    DOWN = 'Dw'
+    UP = 'Up'
     VOTE_CHOICES = (
         (DOWN, 'Down'),
         (UP, 'Up'),
     )
-    user = models.ForeignKey(User)
-    opinion = models.ForeignKey(Opinion)
-    voteType = models.CharField(max_length=1, choices=VOTE_CHOICES)
+    voteType = models.CharField(max_length=2, choices=VOTE_CHOICES, default=UP)
     def __unicode__(self):
-        return '{0.opinion}, {0.user}, {0.voteType}'.format(self)
+        return self.voteType in (self.UP, self.DOWN)
+
+
+# Used by Article class
+# class Image(models.Model):
+#   submitter = models.CharField(max_length=50)
+#   imageURL = models.URLField();                   #Do we need images as opinions, like an artist's work etc?
+#   def __unicode__(self):                          #Also, Consider changing this to FileField
+#       return self.imageURL
+
+# Used by Article class
+# class Comment(models.Model):
+#   commentText = models.CharField(max_length=1000)
+#   commentVotes = models.ManyToManyField(Vote)
+#   submitter = models.CharField(max_length=50)
+#   def __unicode__(self):
+#       return self.commentText
+#   def AddVote(self, vote):
+#       if vote.voteType == Vote.VOTE_CHOICES.Up:
+#           self.commentVotes.upVotes.add(vote) 
+#       elif vote.voteType == Vote.VOTE_CHOICES.Down:
+#           self.commentVotes.downVotes.add(vote)
+#       self.save()
+
+
+def getArticle(embedcode):
+    try:
+        art = Article.objects.get(embed_code=embedcode)
+    except ObjectDoesNotExist:
+        return "Article does not exist"
+
+def getArticleUpVotes(obj):
+    try:
+        art = Article.objects.get(obj = obj)
+        return art.articleVotes.upVotes.count()
+    except ObjectDoesNotExist:
+        print "Article does not exist"
+
+def getArticleDownVotes(obj):
+    try:
+        art = Article.objects.get(obj = obj)
+        return art.articleVotes.downVotes.count()
+    except ObjectDoesNotExist:
+        print "Article does not exist"
+
+def getOpinionUpVotes(obj):
+    try:
+        op = Opinion.objects.get(obj = obj)
+        return op.opinionVotes.upVotes.count()
+    except ObjectDoesNotExist:
+        print "Opinion does not exist"
+
+def getOpinionDownVotes(obj):
+    try:
+        op = Opinion.objects.get(obj = obj)
+        return op.opinionVotes.downVotes.count()
+    except ObjectDoesNotExist:
+        print "Opinion does not exist"
+
+
+# def getCommentUpVotes(obj):
+#   try:
+#       cmt = Comment.objects.get(obj = obj)
+#       return cmt.commentVotes.upVotes.count()
+#   except ObjectDoesNotExist:
+#       print "Comment does not exist"
+
+# def getCommentDownVotes(obj):
+#   try:
+#       cmt = Comment.objects.get(obj = obj)
+#       return cmt.commentVotes.downVotes.count()
+#   except ObjectDoesNotExist:
+#       print "Comment does not exist"
