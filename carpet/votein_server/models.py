@@ -64,42 +64,6 @@ class Vote(models.Model):
 #           self.commentVotes.downVotes.add(vote)
 #       self.save()
 
-
-def getArticle(embedcode):
-    try:
-        art = Article.objects.get(embed_code=embedcode)
-    except ObjectDoesNotExist:
-        return "Article does not exist"
-
-def getArticleUpVotes(obj):
-    try:
-        art = Article.objects.get(obj = obj)
-        return art.articleVotes.upVotes.count()
-    except ObjectDoesNotExist:
-        print "Article does not exist"
-
-def getArticleDownVotes(obj):
-    try:
-        art = Article.objects.get(obj = obj)
-        return art.articleVotes.downVotes.count()
-    except ObjectDoesNotExist:
-        print "Article does not exist"
-
-def getOpinionUpVotes(obj):
-    try:
-        op = Opinion.objects.get(obj = obj)
-        return op.opinionVotes.upVotes.count()
-    except ObjectDoesNotExist:
-        print "Opinion does not exist"
-
-def getOpinionDownVotes(obj):
-    try:
-        op = Opinion.objects.get(obj = obj)
-        return op.opinionVotes.downVotes.count()
-    except ObjectDoesNotExist:
-        print "Opinion does not exist"
-
-
 # def getCommentUpVotes(obj):
 #   try:
 #       cmt = Comment.objects.get(obj = obj)
