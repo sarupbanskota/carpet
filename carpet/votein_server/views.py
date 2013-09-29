@@ -7,7 +7,7 @@ from django.shortcuts import render_to_response
 
 class ErrorView(TemplateView):
 	def get_context_data(self):
-		return RequestContext(self.request)
+		return render_to_response('errorpage.html')
 
 def ArticleReadView(request, embedcode):
 	try:
