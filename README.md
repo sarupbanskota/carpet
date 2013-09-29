@@ -6,7 +6,7 @@ Team [LifeOfPy](http://djangodash.com/teams/c4/lifeofpy/)'s DjangoDash 2013 repo
 We're trying to change the way people reach opinionated content on the web. 
 
 At vote.in, people write blogposts. What we're doing differently is the way readers argue about the writer's opinions. 
-Of course you agree with the author when he says "Java's a great language"(because it wastes everyone else's time and keeps you ahead of the competition). So vote that point up! But he's saying Java runs everywhere and that's why it's the best language on earth. If that's the case, anal sex must be the best cuz you can do it with anyone. Vote him down, he's being stupid!
+Of course you agree with the author when he says "Java's a great language"(because it wastes everyone else's time and keeps you ahead of the competition). So vote that point up! But he's saying Java runs everywhere and that's why it's the best language on earth. Vote him down, he's being stupid!
 
 We're going to aggregate such upvotes/downvotes against various particular opinions in a post and come up with a conclusion about whether people tend to agree with an article or not. Now PageRank can just say if an article is being read. We're telling you if people love it. Beat that, Google ;)
 
