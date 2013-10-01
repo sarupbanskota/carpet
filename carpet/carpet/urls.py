@@ -24,7 +24,7 @@ urlpatterns = patterns('',
         context_object_name='article'
     )),
 
-    url(r'^article/(?P<embedcode>\d+)/$', ArticleReadView),
+    url(r'^article/(?P<articleLink>\d+)/$', ArticleReadView),
 
     url(r'^error/$', ErrorView.as_view(
         template_name='errorpage.html'
