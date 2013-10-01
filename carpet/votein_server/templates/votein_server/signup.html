@@ -6,7 +6,7 @@
 {% block content %}
       <form class="form-signin" action="{% url 'signup' %}" method="post">
         {% csrf_token %}
-        <h2 class="form-signin-heading">Enter your details</h2>
+        <h2 class="form-signin-heading">Create account</h2>
         <input class="form-control" placeholder="Username" name="username" autofocus="" type="text">
         <input class="form-control" placeholder="Email" name="email" type="email">
         <input class="form-control" placeholder="Password" name="password" type="password"><br />
